@@ -40,6 +40,10 @@ const (
 	FLUSHQ     = CommandCode(0x18)
 	APPENDQ    = CommandCode(0x19)
 	PREPENDQ   = CommandCode(0x1a)
+	VERBOSITY  = CommandCode(0x1b)
+	TOUCH      = CommandCode(0x1c)
+	GAT        = CommandCode(0x1d)
+	GATQ       = CommandCode(0x1e)
 	RGET       = CommandCode(0x30)
 	RSET       = CommandCode(0x31)
 	RSETQ      = CommandCode(0x32)
@@ -130,6 +134,10 @@ func init() {
 	CommandNames[FLUSHQ] = "FLUSHQ"
 	CommandNames[APPENDQ] = "APPENDQ"
 	CommandNames[PREPENDQ] = "PREPENDQ"
+	CommandNames[VERBOSITY] = "VERBOSITY"
+	CommandNames[TOUCH] = "TOUCH"
+	CommandNames[GAT] = "GAT"
+	CommandNames[GATQ] = "GATQ"
 	CommandNames[RGET] = "RGET"
 	CommandNames[RSET] = "RSET"
 	CommandNames[RSETQ] = "RSETQ"
@@ -194,23 +202,23 @@ func (s Status) String() (rv string) {
 func (o CommandCode) IsQuiet() bool {
 	switch o {
 	case GETQ,
-		GETKQ,
-		SETQ,
-		ADDQ,
-		REPLACEQ,
-		DELETEQ,
-		INCREMENTQ,
-		DECREMENTQ,
-		QUITQ,
-		FLUSHQ,
-		APPENDQ,
-		PREPENDQ,
-		RSETQ,
-		RAPPENDQ,
-		RPREPENDQ,
-		RDELETEQ,
-		RINCRQ,
-		RDECRQ:
+	GETKQ,
+	SETQ,
+	ADDQ,
+	REPLACEQ,
+	DELETEQ,
+	INCREMENTQ,
+	DECREMENTQ,
+	QUITQ,
+	FLUSHQ,
+	APPENDQ,
+	PREPENDQ,
+	RSETQ,
+	RAPPENDQ,
+	RPREPENDQ,
+	RDELETEQ,
+	RINCRQ,
+	RDECRQ:
 		return true
 	}
 	return false

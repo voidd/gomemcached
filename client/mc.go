@@ -11,7 +11,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/dustin/gomemcached"
+	"github.com/voidd/gomemcached"
 )
 
 const bufsize = 1024
@@ -189,6 +189,19 @@ func (c *Client) Append(vb uint16, key string, data []byte) (*gomemcached.MCResp
 		Opaque:  0,
 		Body:    data}
 
+	return c.Send(req)
+}
+
+// Touch touches a key.
+func (c *Client) Touch(vb uint16, key string, exp int) (*gomemcached.MCResponse, error) {
+	req := &gomemcached.MCRequest{
+		Opcode:  gomemcached.TOUCH,
+		VBucket: vb,
+		Key:     []byte(key),
+		Extras:  []byte{0, 0, 0, 0, 0, 0, 0, 0},
+	}
+
+	binary.BigEndian.PutUint64(req.Extras, uint64(flags)<<32|uint64(exp))
 	return c.Send(req)
 }
 
